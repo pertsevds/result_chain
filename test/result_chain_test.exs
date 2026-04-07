@@ -56,15 +56,30 @@ defmodule ResultChainTest do
                {:ok, 10.0}
     end
 
-    test "print code from ast" do
+    test "code_from_ast returns the expanded chain as a string" do
       ast =
         quote do
           {:ok, "10"} ~> parse() ~> reciprocal()
         end
 
-      out = ResultChain.code_from_ast(ast)
-      IO.puts(out)
-      assert true
+      expected = """
+      case opaque(parse("10")) do
+        :error ->
+          :error
+
+        {:error, error} ->
+          {:error, error}
+
+        other ->
+          case wrap_result(opaque(other)) do
+            :__error__ -> :error
+            {:__error__, reason} -> {:error, reason}
+            {:__value__, value} -> reciprocal(value)
+          end
+      end
+      """
+
+      assert ResultChain.code_from_ast(ast) == String.trim_trailing(expected)
     end
 
     test "narrow-typed chains compile under warnings-as-errors" do
