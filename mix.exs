@@ -22,7 +22,7 @@ defmodule ResultChain.MixProject do
       source_url: @scm_url,
       homepage_url: @scm_url,
       elixirc_paths: elixirc_paths(Mix.env()),
-      description: "Result-chaining operators for Elixir"
+      description: "Result-chaining operator for Elixir"
     ]
   end
 
