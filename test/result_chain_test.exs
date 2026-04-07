@@ -141,19 +141,20 @@ defmodule ResultChainTest do
     test "custom chain operators accept bare local calls" do
       module = Module.concat(__MODULE__, :"BareLocalCalls#{System.unique_integer([:positive])}")
 
-      Code.compile_quoted(
-        quote do
-          defmodule unquote(module) do
-            use ResultChain
+      ast =
+        Code.string_to_quoted!("""
+        defmodule #{inspect(module)} do
+          use ResultChain
 
-            def foo_pipe(x), do: x + 1
-            def foo_chain(x), do: {:ok, x + 1}
+          def foo_pipe(x), do: x + 1
+          def foo_chain(x), do: {:ok, x + 1}
 
-            def run_pipe, do: 1 |> foo_pipe
-            def run_chain, do: {:ok, 1} ~> foo_chain
-          end
+          def run_pipe, do: 1 |> foo_pipe
+          def run_chain, do: {:ok, 1} ~> foo_chain
         end
-      )
+        """)
+
+      Code.compile_quoted(ast)
 
       assert module.run_pipe() == 2
       assert module.run_chain() == {:ok, 2}
