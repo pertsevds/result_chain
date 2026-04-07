@@ -3,7 +3,7 @@
 
 defmodule ResultChain do
   @moduledoc """
-  Result-aware chaining operators for Elixir workflows.
+  Result-aware chaining operator for Elixir workflows.
 
   `ResultChain` adds the `~>` operator for chaining steps that may return
   success or error values. Successful results continue to the next step, while
@@ -18,7 +18,7 @@ defmodule ResultChain do
   - `nil` is treated as a successful value
   - any other non-error value is treated as a successful value
 
-  There are two ways to integrate the operators:
+  There are two ways to integrate the operator:
 
   - `use ResultChain` imports `ResultChain` and locally replaces `Kernel.|>/2`,
     so `|>` and `~>` can be mixed in one chain

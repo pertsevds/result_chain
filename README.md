@@ -1,6 +1,6 @@
 # ResultChain
 
-Result-aware chaining operators for Elixir workflows.
+Result-aware chaining operator for Elixir workflows.
 
 ## What It Does
 
