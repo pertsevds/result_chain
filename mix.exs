@@ -21,8 +21,7 @@ defmodule ResultChain.MixProject do
       deps: deps(),
       source_url: @scm_url,
       homepage_url: @scm_url,
-      elixirc_paths: elixirc_paths(Mix.env()),
-      description: "Result-chaining operator for Elixir"
+      elixirc_paths: elixirc_paths(Mix.env())
     ]
   end
 
@@ -36,7 +35,7 @@ defmodule ResultChain.MixProject do
   end
 
   defp description do
-    "Result-chaining operators for composing Elixir workflows."
+    "Result-chaining operator for composing Elixir workflows."
   end
 
   defp docs do
