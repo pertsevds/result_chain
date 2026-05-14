@@ -25,6 +25,10 @@ defmodule ResultChain do
   - `import ResultChain` imports only this module's macros, which is useful for
     `~>`-only chains
 
+  When a `~>` step is followed by `|>`, the `|>` step receives the raw result
+  returned by the previous step. `~>` only unwraps successful results before
+  calling its own right-hand side.
+
   ## Mixed chains with `use ResultChain`
 
   ```elixir

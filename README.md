@@ -29,6 +29,10 @@ Use `ResultChain` when you want to mix ordinary pipe steps with result-aware
 steps in the same chain. `use ResultChain` locally replaces `Kernel.|>/2` in
 that module and imports `ResultChain`.
 
+When a `~>` step is followed by `|>`, the `|>` step receives the raw result
+returned by the previous step. `~>` only unwraps successful results before
+calling its own right-hand side.
+
 ```elixir
 defmodule MyWorkflow do
   use ResultChain
